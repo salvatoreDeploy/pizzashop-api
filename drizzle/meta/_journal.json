@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710212326219,
+      "tag": "0000_lean_frank_castle",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710212519999,
+      "tag": "0001_elite_squadron_supreme",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710243638873,
+      "tag": "0002_tiny_invaders",
+      "breakpoints": true
+    }
+  ]
+}
