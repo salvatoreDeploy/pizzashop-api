@@ -1,6 +1,6 @@
 {
-  "id": "d7c50ee0-b628-4ee6-b1ae-9cbac4175426",
-  "prevId": "3c87a642-e12a-4d48-8264-798be9eb7c0c",
+  "id": "9656c736-100a-49b4-b8e3-03aecdf2c51b",
+  "prevId": "d7c50ee0-b628-4ee6-b1ae-9cbac4175426",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -128,6 +128,63 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
+    },
+    "auth_links": {
+      "name": "auth_links",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_links_user_id_users_id_fk": {
+          "name": "auth_links_user_id_users_id_fk",
+          "tableFrom": "auth_links",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "auth_links_code_unique": {
+          "name": "auth_links_code_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "code"
+          ]
+        }
+      }
     }
   },
   "enums": {

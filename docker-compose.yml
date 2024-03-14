@@ -9,7 +9,9 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=api-forum
-      - PGDATA=/data/postgres
+      - POSTGRES_DB=pizzashop
     volumes:
-      - ./data/pg:/data/postgres
+      - pizzashop_pg_data:/bitnami/postgresql
+
+volumes:
+  pizzashop_pg_data:
