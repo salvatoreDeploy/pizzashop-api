@@ -14,6 +14,10 @@
 - [] eslint
 - [] @rocketseat/eslint-config -D
 - [] eslint-plugin-drizzle
+- [] @elysiajs/jw
+- [] @elysiajs/cookie
+- [] dayjs
+- [] nodemailer
 
 To install dependencies:
 
