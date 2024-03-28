@@ -2,10 +2,12 @@ import { Elysia, t } from 'elysia'
 import { auth } from '../auth'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { database } from '../../database/connection'
+import { orders } from '../../database/schema'
+import { eq } from 'drizzle-orm'
 
-export const getOrderDetails = new Elysia().use(auth).get(
-  '/orders/:orderId',
-  async ({ getCurrentUser, params, set }) => {
+export const aprovedOrder = new Elysia().use(auth).patch(
+  'orders/:orderId/aprove',
+  async ({ getCurrentUser, set, params }) => {
     const { orderId } = params
     const { restaurantId } = await getCurrentUser()
 
@@ -14,35 +16,6 @@ export const getOrderDetails = new Elysia().use(auth).get(
     }
 
     const order = await database.query.orders.findFirst({
-      columns: {
-        id: true,
-        status: true,
-        totalInCents: true,
-        createdAt: true,
-      },
-      with: {
-        customer: {
-          columns: {
-            name: true,
-            phone: true,
-            email: true,
-          },
-        },
-        ordersItems: {
-          columns: {
-            id: true,
-            priceInInCents: true,
-            quantity: true,
-          },
-          with: {
-            product: {
-              columns: {
-                name: true,
-              },
-            },
-          },
-        },
-      },
       where(fields, { eq, and }) {
         return and(
           eq(fields.id, orderId),
@@ -53,10 +26,20 @@ export const getOrderDetails = new Elysia().use(auth).get(
 
     if (!order) {
       set.status = 400
+
       return { message: 'Order not found' }
     }
 
-    return order
+    if (order.status !== 'pending') {
+      set.status = 400
+
+      return { message: 'You can only approve pending orders' }
+    }
+
+    await database
+      .update(orders)
+      .set({ status: 'processing' })
+      .where(eq(orders.id, orderId))
   },
   {
     params: t.Object({

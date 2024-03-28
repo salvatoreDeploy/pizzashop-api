@@ -18,6 +18,7 @@
 - [] @elysiajs/cookie
 - [] dayjs
 - [] nodemailer
+- [] drizzle-typebox
 
 To install dependencies:
 
