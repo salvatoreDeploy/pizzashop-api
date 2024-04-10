@@ -17,6 +17,8 @@ import { getMonthOrdersAmount } from './routes/get-month-orders.amount'
 import { getCanceledMonthOrdersAmount } from './routes/get-canceled-month-amount'
 import { getPopularProduct } from './routes/get-popular-products'
 import { getDailyReceipInPeriod } from './routes/get-daily-receipt-in-period'
+import cors from '@elysiajs/cors'
+
 
 const app = new Elysia()
   .use(registerRestaurant)
@@ -54,6 +56,6 @@ const app = new Elysia()
     }
   })
 
-app.listen(3333, () => {
+app.use(cors({ origin: '*' })).listen(3333, () => {
   console.log('🔥 HTTP server running 🔥')
 })

@@ -2,16 +2,16 @@ version: "3.7"
 
 services:
   postgres:
-    container_name: pizzashop-api-postgres
+    container_name: feastflow-api-postgres
     image: bitnami/postgresql:latest
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=pizzashop
+      - POSTGRES_DB=feastflow
     volumes:
-      - pizzashop_pg_data:/bitnami/postgresql
+      - feastflow_pg_data:/bitnami/postgresql
 
 volumes:
-  pizzashop_pg_data:
+  feastflow_pg_data:

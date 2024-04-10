@@ -42,7 +42,7 @@ export const SendAuthLink = new Elysia().post(
     const authLink = new URL('/auth-link/authenticate', env.API_BASE_URL)
 
     authLink.searchParams.set('code', authLinkCode) // http://localhost:3333/auth-link/authenticate?code=CODE
-    authLink.searchParams.set('redirect', env.AUTH_REDIRECT_URL)
+    authLink.searchParams.set('redirect', 'http://localhost:5173')
 
     // Envio de e-mail
 
