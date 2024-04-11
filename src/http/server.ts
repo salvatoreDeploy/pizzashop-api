@@ -18,10 +18,27 @@ import { getCanceledMonthOrdersAmount } from './routes/get-canceled-month-amount
 import { getPopularProduct } from './routes/get-popular-products'
 import { getDailyReceipInPeriod } from './routes/get-daily-receipt-in-period'
 import cors from '@elysiajs/cors'
-
+import { getManagedRestaurant } from './routes/get-managed-restaurant'
 
 const app = new Elysia()
+  .use(
+    cors({
+      credentials: true,
+      allowedHeaders: ['content-type'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+      origin: (request): boolean => {
+        const origin = request.headers.get('origin')
+
+        if (!origin) {
+          return false
+        }
+
+        return true
+      },
+    }),
+  )
   .use(registerRestaurant)
+  .use(getManagedRestaurant)
   .use(SendAuthLink)
   .use(authneticateFromLink)
   .use(signOut)
@@ -56,6 +73,6 @@ const app = new Elysia()
     }
   })
 
-app.use(cors({ origin: '*' })).listen(3333, () => {
+app.listen(3333, () => {
   console.log('🔥 HTTP server running 🔥')
 })

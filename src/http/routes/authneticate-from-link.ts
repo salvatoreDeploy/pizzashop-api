@@ -9,8 +9,8 @@ import { LinkExpiredError } from '../errors/link-expired'
 
 export const authneticateFromLink = new Elysia().use(auth).get(
   '/auth-link/authenticate',
-  async ({ query, signIn /* set */ }) => {
-    const { code /* , redirect  */ } = query
+  async ({ query, signIn, set }) => {
+    const { code, redirect } = query
 
     const authLinkFromCode = await database.query.authLinks.findFirst({
       where(fields, { eq }) {
@@ -44,7 +44,7 @@ export const authneticateFromLink = new Elysia().use(auth).get(
 
     await database.delete(authLinks).where(eq(authLinks.code, code))
 
-    /* set.redirect = redirect */
+    set.redirect = redirect
   },
   {
     query: t.Object({
