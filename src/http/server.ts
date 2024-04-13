@@ -19,6 +19,7 @@ import { getPopularProduct } from './routes/get-popular-products'
 import { getDailyReceipInPeriod } from './routes/get-daily-receipt-in-period'
 import cors from '@elysiajs/cors'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
+import { updateProfile } from './routes/update-profile'
 
 const app = new Elysia()
   .use(
@@ -39,6 +40,7 @@ const app = new Elysia()
   )
   .use(registerRestaurant)
   .use(getManagedRestaurant)
+  .use(updateProfile)
   .use(SendAuthLink)
   .use(authneticateFromLink)
   .use(signOut)
