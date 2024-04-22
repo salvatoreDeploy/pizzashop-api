@@ -18,7 +18,7 @@
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/bun": "latest",
     "@types/nodemailer": "^6.4.14",
-    "drizzle-kit": "^0.20.14",
+    "drizzle-kit": "^0.20.17",
     "eslint": "^8.57.0",
     "eslint-plugin-drizzle": "^0.2.3",
     "pg": "^8.11.3"
