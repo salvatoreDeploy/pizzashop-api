@@ -37,7 +37,11 @@ export const getOrders = new Elysia().use(auth).get(
         ),
       )
 
-    const [[{ count: amountOfOrders }], allOrders] = await Promise.all([
+    const [amountOfOrders] = await database
+      .select({ count: count() })
+      .from(baseQuery.as('baseQuery'))
+
+    const allOrders = await Promise.all([
       database.select({ count: count() }).from(baseQuery.as('baseQuery')),
       database
         .select()
