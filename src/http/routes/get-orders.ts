@@ -33,15 +33,11 @@ export const getOrders = new Elysia().use(auth).get(
           eq(orders.restaurantId, restaurantId),
           orderId ? ilike(orders.id, `%${orderId}%`) : undefined,
           status ? eq(orders.status, status) : undefined,
-          customerName ? ilike(orders.id, `%${customerName}%`) : undefined,
+          customerName ? ilike(user.name, `%${customerName}%`) : undefined,
         ),
       )
 
-    const [amountOfOrders] = await database
-      .select({ count: count() })
-      .from(baseQuery.as('baseQuery'))
-
-    const allOrders = await Promise.all([
+    const [amountOfOrdersQuery, allOrders] = await Promise.all([
       database.select({ count: count() }).from(baseQuery.as('baseQuery')),
       database
         .select()
@@ -61,6 +57,8 @@ export const getOrders = new Elysia().use(auth).get(
           ]
         }),
     ])
+
+    const amountOfOrders = amountOfOrdersQuery[0].count
 
     const result = {
       orders: allOrders,

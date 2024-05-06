@@ -50,8 +50,8 @@ export const getMonthReceipt = new Elysia()
         : null
 
     return {
-      receipt: currentMonthReceipt?.receipt,
-      previousReceipt: lastMonthReceipt?.receipt,
+      receipt: currentMonthReceipt?.receipt ?? 0,
+      previousReceipt: lastMonthReceipt?.receipt ?? 0,
       differenceFromLastMonth: differenceFromLastMonth
         ? Number((differenceFromLastMonth - 100).toFixed(2))
         : 0,

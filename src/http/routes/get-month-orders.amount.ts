@@ -50,8 +50,8 @@ export const getMonthOrdersAmount = new Elysia()
         : null
 
     return {
-      amount: currentMonthOrders?.amount,
-      previousAmount: lastMonthOrders?.amount,
+      amount: currentMonthOrders?.amount ?? 0,
+      previousAmount: lastMonthOrders?.amount ?? 0,
       differenceFromLastMonth: differenceFromLastMonth
         ? Number((differenceFromLastMonth - 100).toFixed(2))
         : 0,
